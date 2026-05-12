@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\MatchSchedule;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\PlayerController;
 
 // Home Page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
@@ -11,10 +10,9 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Matches Page
 Route::get('/matches', [App\Http\Controllers\MatchesController::class, 'index'] );
 
-// View the page
+// 1. The Route to see the page (This fixes your error)
 Route::get('/contact', [ContactController::class, 'index']);
 
-// Send the message
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-
+// 2. The Route to handle the form submission
+Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/player', [PlayerController::class, 'index']);
