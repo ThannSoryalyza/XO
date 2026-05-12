@@ -3,45 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    // Show the page
-    public function index() {
-        return view('contact');
+    // ADD THIS: This shows the contact form page
+    public function index()
+    {
+        return view('contact'); // Make sure your file is named resources/views/contact.blade.php
     }
 
-    // Handle the form submission
-   // Handle the form submission
-    public function store(Request $request) {
-        // 1. Validation
-        $request->validate([
+    public function store(Request $request)
+    {
+        $data = $request->validate([
             'name'    => 'required|string|max:255',
             'email'   => 'required|email',
-            'role'    => 'required',
-            'message' => 'required|min:5',
+            'role'    => 'required|string',
+            'message' => 'required|string',
         ]);
 
-        // 2. Email Data
-        $data = [
-            'name'    => $request->name,
-            'email'   => $request->email,
-            'role'    => $request->role,
-            'body'    => $request->message,
-        ];
+        Contact::create($data);
 
-        // 3. Send the Email using Laravel's native Mailer
-        Mail::raw("New Message from XO United Website:\n\n" .
-                  "From: {$data['name']}\n" .
-                  "Email: {$data['email']}\n" .
-                  "Role: {$data['role']}\n" .
-                  "Message: {$data['body']}", function ($message) use ($data) {
+        Mail::send([], [], function ($message) use ($data) {
             $message->to('lizathannsorya@gmail.com')
-                    ->subject('New XO United Inquiry: ' . $data['name']);
+                ->subject('New Message from ' . $data['name'])
+                ->html("<h3>New Contact Submission</h3><p>Name: {$data['name']}</p><p>Message: {$data['message']}</p>");
         });
 
-        // 4. Success Message
-        return back()->with('success', 'Your message has been sent to XO United!');
+        return back()->with('success', 'Message sent successfully!');
     }
 }

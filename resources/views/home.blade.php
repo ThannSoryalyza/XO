@@ -40,10 +40,10 @@
             <div class="relative group">
                 <div class="absolute -inset-2 bg-red-600 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-500"></div>
                 <div class="relative w-72 h-96 md:w-96 md:h-[500px] overflow-hidden rounded-lg bg-gray-200 border-4 border-white shadow-2xl">
-                    <img src="match.jpg"
+                    <img src="capitan.jpg"
                          alt="Football Player"
                          class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-linear-to-t from-red-900/60 to-transparent"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-red-900/40 to-transparent"></div>
                 </div>
             </div>
         </div>
