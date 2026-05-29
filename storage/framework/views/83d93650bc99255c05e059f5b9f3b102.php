@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Match Schedule</title>
+    <title>Match Schedule | XO United</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/views/components/header.blade.php">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
 <?php endif; ?>
 
     <section class="max-w-7xl mx-auto px-6 py-2">
-        <h1 class="inline-block px-4 py-1 mb-6 border-l-4 border-red-600 bg-red-50 text-red-600 font-bold text-sm uppercase tracking-widest ml-10 mt-8">
+        <h1 class="inline-block px-4 py-1 mb-6 border-l-4 border-red-600 bg-green-50 text-red-600 font-bold text-sm uppercase tracking-widest ml-10 mt-8">
             Upcoming Matches
         </h1>
 
@@ -45,10 +45,9 @@
 
                 <div class="relative w-full h-55 aspect-video md:aspect-square lg:aspect-4/3 overflow-hidden bg-gray-200 rounded-t-xl">
                      <?php if($match->image): ?>
-                        <img src="<?php echo e(asset($match->image)); ?>"
-                        alt="Match Poster"
-                        /* 1. Change 'object-cover' to 'object-contain' */
-                        class="w-full h-full rounded-xl object-contain transition-transform duration-300 group-hover:scale-105 p-2">
+                        <img src="<?php echo e(asset('storage/' . $match->image)); ?>"
+     alt="Match Poster"
+     class="w-full h-full rounded-xl object-contain transition-transform duration-300 group-hover:scale-105 p-2">
     <?php else: ?>
         <div class="flex flex-col items-center justify-center h-full text-gray-400 p-4">
             <span class="text-3xl mb-2">🖼️</span>
@@ -83,9 +82,26 @@
             <?php endif; ?>
         </div>
     </section>
-    <footer class="py-8 bg-red-600 text-center border-t border-gray-100 mt-12">
-        <p class="font-stadium text-xl text-white">Copyright &copy; 2026 XO United</p>
-    </footer>
+    <?php if (isset($component)) { $__componentOriginal8a8716efb3c62a45938aca52e78e0322 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal8a8716efb3c62a45938aca52e78e0322 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.footer','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('footer'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal8a8716efb3c62a45938aca52e78e0322)): ?>
+<?php $attributes = $__attributesOriginal8a8716efb3c62a45938aca52e78e0322; ?>
+<?php unset($__attributesOriginal8a8716efb3c62a45938aca52e78e0322); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal8a8716efb3c62a45938aca52e78e0322)): ?>
+<?php $component = $__componentOriginal8a8716efb3c62a45938aca52e78e0322; ?>
+<?php unset($__componentOriginal8a8716efb3c62a45938aca52e78e0322); ?>
+<?php endif; ?>
 </body>
 </html>
 <?php /**PATH C:\Users\CG-HENG\Documents\testing\resources\views/matches.blade.php ENDPATH**/ ?>

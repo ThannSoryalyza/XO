@@ -15,10 +15,12 @@
    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b-2 border-red-600 shadow-sm">
     <div class="flex items-center justify-between px-6 py-4">
         <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white overflow-hidden shadow-lg shadow-red-600/30">
-                <img src="{{ asset('XO.jpg') }}" alt="Logo" class="object-cover w-full h-full">
-            </div>
-            <span class="font-stadium text-3xl tracking-wide uppercase">XO United</span>
+            <a class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-white overflow-hidden shadow-lg shadow-red-600/30" href="{{ url('/') }}">
+                <img src="{{ asset('XO.png') }}" alt="Logo" class="object-cover w-full h-full">
+            </a>
+            <a href="{{ url('/') }}">
+                <span class="font-stadium text-3xl tracking-wide uppercase">XO United</span>
+            </a>
         </div>
 
         <div class="hidden md:flex gap-10 font-bold uppercase text-sm tracking-widest">
@@ -31,6 +33,9 @@
             <a href="{{ url('/player') }}" class="{{ Request::is('player') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
                 All Players
             </a>
+            <a href="{{ url('/managers') }}" class="{{ Request::is('managers') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
+                        Manager Team
+                    </a>
 
             <button class="md:hidden text-2xl p-2" onclick="toggleMobileMenu()">
                 ☰

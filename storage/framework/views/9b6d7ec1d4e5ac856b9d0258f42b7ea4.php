@@ -6,6 +6,7 @@
     <title>XO United</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/views/components/header.blade.php">
+    <link rel="stylesheet" href="/views/components/footer.blade.php">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Instrument Sans', sans-serif; }
@@ -96,13 +97,38 @@
             <p class="text-lg md:text-sm text-gray-600 mt-4 max-w-2xl mx-auto">
                 Whether you're a player, coach, scout, agent, sponsor, or media professional, XO United is your home for football excellence. Contact us today to learn how we can support your career and help you achieve your goals.
             </p>
-            <img src="our_team.jpg" alt="Our Team" class="w-200 h-100 justify-center mx-auto mt-5 shadow-lg " >
+                <div class="mt-5 hidden md:flex gap-10 uppercase text-sm tracking-widest justify-center">
+                    <a href="<?php echo e(url('/player')); ?>" class="<?php echo e(Request::is('player') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white'); ?> px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
+                        All Players
+                    </a>
+                    <a href="<?php echo e(url('/managers')); ?>" class="<?php echo e(Request::is('managers') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white'); ?> px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
+                        Manager Team
+                    </a>
+                </div>
+            <img src="team.jpg" alt="Our Team" class="w-200 h-100 justify-center mx-auto mt-5 shadow-lg " >
         </div>
     </section>
 
-    <footer class="py-8 bg-red-600 text-center border-t border-gray-100 mt-12">
-        <p class="font-stadium text-xl text-white">Copyright &copy; 2026 XO United</p>
-    </footer>
+<?php if (isset($component)) { $__componentOriginal8a8716efb3c62a45938aca52e78e0322 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal8a8716efb3c62a45938aca52e78e0322 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.footer','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('footer'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal8a8716efb3c62a45938aca52e78e0322)): ?>
+<?php $attributes = $__attributesOriginal8a8716efb3c62a45938aca52e78e0322; ?>
+<?php unset($__attributesOriginal8a8716efb3c62a45938aca52e78e0322); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal8a8716efb3c62a45938aca52e78e0322)): ?>
+<?php $component = $__componentOriginal8a8716efb3c62a45938aca52e78e0322; ?>
+<?php unset($__componentOriginal8a8716efb3c62a45938aca52e78e0322); ?>
+<?php endif; ?>
 
 </body>
 </html>

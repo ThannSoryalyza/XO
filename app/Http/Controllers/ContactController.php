@@ -3,34 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Message; // 💡 Change from Inquiry to Message
 
 class ContactController extends Controller
 {
-    // ADD THIS: This shows the contact form page
     public function index()
     {
-        return view('contact'); // Make sure your file is named resources/views/contact.blade.php
+        return view('contact');
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
             'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'role'    => 'required|string',
+            'email'   => 'required|email|max:255',
+            'subject' => 'nullable|string|max:255',
             'message' => 'required|string',
         ]);
 
-        Contact::create($data);
+        // 💡 Save directly to the Message model so it updates the Admin Panel inbox
+        Message::create($data);
 
-        Mail::send([], [], function ($message) use ($data) {
-            $message->to('lizathannsorya@gmail.com')
-                ->subject('New Message from ' . $data['name'])
-                ->html("<h3>New Contact Submission</h3><p>Name: {$data['name']}</p><p>Message: {$data['message']}</p>");
-        });
-
-        return back()->with('success', 'Message sent successfully!');
+        return back()->with('success', 'Your message has been sent successfully!');
     }
 }

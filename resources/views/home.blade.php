@@ -6,6 +6,7 @@
     <title>XO United</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="/views/components/header.blade.php">
+    <link rel="stylesheet" href="/views/components/footer.blade.php">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Instrument Sans', sans-serif; }
@@ -77,13 +78,19 @@
             <p class="text-lg md:text-sm text-gray-600 mt-4 max-w-2xl mx-auto">
                 Whether you're a player, coach, scout, agent, sponsor, or media professional, XO United is your home for football excellence. Contact us today to learn how we can support your career and help you achieve your goals.
             </p>
-            <img src="our_team.jpg" alt="Our Team" class="w-200 h-100 justify-center mx-auto mt-5 shadow-lg " >
+                <div class="mt-5 hidden md:flex gap-10 uppercase text-sm tracking-widest justify-center">
+                    <a href="{{ url('/player') }}" class="{{ Request::is('player') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
+                        All Players
+                    </a>
+                    <a href="{{ url('/managers') }}" class="{{ Request::is('managers') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
+                        Manager Team
+                    </a>
+                </div>
+            <img src="team.jpg" alt="Our Team" class="w-200 h-100 justify-center mx-auto mt-5 shadow-lg " >
         </div>
     </section>
 
-    <footer class="py-8 bg-red-600 text-center border-t border-gray-100 mt-12">
-        <p class="font-stadium text-xl text-white">Copyright &copy; 2026 XO United</p>
-    </footer>
+<x-footer />
 
 </body>
 </html>

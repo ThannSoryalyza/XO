@@ -12,79 +12,127 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-<x-header />
-    <section class="max-w-5xl mx-auto px-6 py-16">
-        <div class="flex flex-col lg:flex-row gap-16">
-            <div class="flex-1">
-                <h1 class="font-stadium text-5xl md:text-6xl tracking-tight">Contact Us</h1>
-                <p class="text-lg md:text-xl text-red-600 mt-4">Have questions? We'd love to hear from you!</p>
 
-                <div class="space-y-6 mt-8">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-red-100 flex items-center justify-center text-red-600 rounded-lg">📍</div>
+    <x-header />
+
+    <section class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
+
+            <!-- Left Side: Contact Information & Training Schedule -->
+            <div class="w-full lg:flex-1 space-y-10">
+                <div>
+                    <h1 class="font-stadium text-5xl md:text-7xl tracking-tight uppercase leading-none">Contact Us</h1>
+                    <p class="text-lg md:text-xl text-red-600 mt-4 font-medium italic">Have questions? We'd love to hear from you!</p>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="flex items-center gap-5 group">
+                        <div class="w-14 h-14 bg-red-100 flex items-center justify-center text-2xl rounded-2xl text-red-600 transition-colors group-hover:bg-red-600 group-hover:text-white">📍</div>
                         <div>
-                            <p class="font-bold uppercase text-xs text-red-600">Address</p>
-                            <p class="text-gray-700">Veng Sreng, Phnom Penh</p>
+                            <p class="font-bold uppercase text-[10px] text-red-600 tracking-[0.2em]">Address</p>
+                            <p class="text-gray-800 font-bold text-lg">Veng Sreng, Phnom Penh</p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-red-100 flex items-center justify-center text-red-600 rounded-lg">✉️</div>
+
+                    <div class="flex items-center gap-5 group">
+                        <div class="w-14 h-14 bg-red-100 flex items-center justify-center text-2xl rounded-2xl text-red-600 transition-colors group-hover:bg-red-600 group-hover:text-white">✉️</div>
                         <div>
-                            <p class="font-bold uppercase text-xs text-red-600">Email</p>
-                            <p class="text-gray-700">xounited@gmail.com</p>
+                            <p class="font-bold uppercase text-[10px] text-red-600 tracking-[0.2em]">Email</p>
+                            <p class="text-gray-800 font-bold text-lg">xounited@gmail.com</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="w-full bg-white p-8 rounded-3xl border-l-8 border-red-600 shadow-xl transition-all hover:shadow-2xl">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-3xl">🏃‍♂️</span>
+                        <h3 class="font-stadium text-3xl uppercase italic tracking-wider text-gray-900">Training Session</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-bold text-gray-500 text-xs uppercase tracking-widest">Tue - Sat</span>
+                            <span class="text-sm md:text-base font-black text-gray-900">5:30 PM - 7:30 PM</span>
+                        </div>
+
+                        <div class="flex justify-between items-center border-b border-gray-100 pb-3">
+                            <span class="font-bold text-gray-500 text-xs uppercase tracking-widest">Friday</span>
+                            <span class="text-sm md:text-base font-black text-gray-900">3:00 PM - 5:00 PM</span>
+                        </div>
+
+                        <div class="flex justify-between items-center bg-red-600 p-4 rounded-xl text-white shadow-lg shadow-red-200">
+                            <span class="font-bold text-xs uppercase tracking-widest">Sunday</span>
+                            <span class="text-sm md:text-base font-black italic">9:00 AM - 11:00 AM</span>
+                        </div>
+                    </div>
+
+                    <p class="mt-6 text-[10px] text-gray-400 font-bold italic text-center tracking-wider leading-tight">
+                        * Schedule subject to change based on Match Fixtures
+                    </p>
+                </div>
             </div>
 
-            <div class="flex-1 bg-white p-8 md:p-12 shadow-2xl border-t-8 border-red-600">
+            <!-- Right Side: The Secure Form Box -->
+            <div class="w-full lg:flex-1 bg-white p-8 md:p-12 shadow-2xl border-t-8 border-red-600 rounded-b-3xl">
+
+                <!-- Success Notification Banner -->
                 @if(session('success'))
-                    <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 font-bold">
-                        {{ session('success') }}
+                    <div class="mb-8 p-4 bg-red-100 border-l-4 border-red-500 text-red-800 font-bold animate-bounce flex items-center gap-3">
+                        <span class="text-xl">✅</span> {{ session('success') }}
                     </div>
                 @endif
 
-                <form action="{{ url('/contact') }}" method="POST" class="space-y-6">
+                <!-- Contact Form Wrapper -->
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
                     @csrf
-                    <div>
-                        <label class="block font-stadium text-xl mb-2">Full Name</label>
-                        <input type="text" name="name" value="{{ old('name') }}" required placeholder="John Doe"
-                            class="w-full p-4 bg-gray-50 border-2 focus:border-red-600 outline-none @error('name') border-red-500 @enderror">
+
+                    <!-- Full Name Input -->
+                    <div class="group">
+                        <label class="block font-stadium text-xl mb-2 group-focus-within:text-red-600 transition-colors uppercase tracking-wide">Full Name</label>
+                        <input type="text" name="name" value="{{ old('name') }}" required placeholder="Enter your name"
+                            class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 focus:bg-white outline-none transition-all rounded-lg">
+                        @error('name') <p class="text-red-600 text-[10px] mt-2 uppercase font-bold tracking-widest">{{ $message }}</p> @enderror
                     </div>
 
-                    <div>
-                        <label class="block font-stadium text-xl mb-2">Email Address</label>
+                    <!-- Email Input -->
+                    <div class="group">
+                        <label class="block font-stadium text-xl mb-2 group-focus-within:text-red-600 transition-colors uppercase tracking-wide">Email Address</label>
                         <input type="email" name="email" value="{{ old('email') }}" required placeholder="email@example.com"
-                            class="w-full p-4 bg-gray-50 border-2 focus:border-red-600 outline-none @error('email') border-red-500 @enderror">
+                            class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 focus:bg-white outline-none transition-all rounded-lg">
+                        @error('email') <p class="text-red-600 text-[10px] mt-2 uppercase font-bold tracking-widest">{{ $message }}</p> @enderror
                     </div>
 
+                    <!-- Subject Selector -->
                     <div>
-                        <label class="block font-stadium text-xl mb-2">Position / Role</label>
-                        <select name="role" required class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 outline-none">
-                            <option value="" disabled selected>-- Select One --</option>
-                            <option value="Player" {{ old('role') == 'Player' ? 'selected' : '' }}>Player</option>
-                            <option value="Coach" {{ old('role') == 'Coach' ? 'selected' : '' }}>Coach</option>
-                            <option value="Scout" {{ old('role') == 'Scout' ? 'selected' : '' }}>Scout</option>
-                            <option value="Sponsor" {{ old('role') == 'Sponsor' ? 'selected' : '' }}>Sponsor</option>
-                        </select>
+                        <label class="block font-stadium text-xl mb-2 uppercase tracking-wide">Subject (Position)</label>
+                        <div class="relative">
+                            <select name="subject" required class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 outline-none rounded-lg appearance-none cursor-pointer">
+                                <option value="" disabled selected>-- Select One --</option>
+                                <option value="Player Inquiry" {{ old('subject') == 'Player Inquiry' ? 'selected' : '' }}>Player</option>
+                                <option value="Coach Inquiry" {{ old('subject') == 'Coach Inquiry' ? 'selected' : '' }}>Coach</option>
+                                <option value="Sponsorship" {{ old('subject') == 'Sponsorship' ? 'selected' : '' }}>Sponsor</option>
+                                <option value="General Question" {{ old('subject') == 'General Question' ? 'selected' : '' }}>Other</option>
+                            </select>
+                            <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 font-bold">▼</div>
+                        </div>
                     </div>
 
-                    <div>
-                        <label class="block font-stadium text-xl mb-2">Your Message</label>
-                        <textarea name="message" rows="4" required placeholder="Tell us how we can help..."
-                            class="w-full p-4 bg-gray-50 border-2 focus:border-red-600 outline-none @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+                    <!-- Message TextArea -->
+                    <div class="group">
+                        <label class="block font-stadium text-xl mb-2 group-focus-within:text-red-600 transition-colors uppercase tracking-wide">Your Message</label>
+                        <textarea name="message" rows="5" required placeholder="How can we help you?"
+                            class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 focus:bg-white outline-none transition-all rounded-lg">{{ old('message') }}</textarea>
+                        @error('message') <p class="text-red-600 text-[10px] mt-2 uppercase font-bold tracking-widest">{{ $message }}</p> @enderror
                     </div>
 
-                    <button type="submit" class="w-full py-5 bg-red-600 text-white font-stadium text-2xl tracking-widest hover:bg-black transition-all">
-                        SEND MESSAGE
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-4 bg-red-600 text-white font-stadium text-2xl tracking-widest hover:bg-black transition-all active:scale-95 shadow-xl shadow-red-600/20 rounded-lg">
+                        Send Message
                     </button>
                 </form>
             </div>
         </div>
     </section>
 
-    <footer class="py-8 bg-red-600 text-center border-t border-gray-100 mt-12">
-        <p class="font-stadium text-xl text-white">Copyright &copy; 2026 XO United</p>
-    </footer>
 </body>
 </html>

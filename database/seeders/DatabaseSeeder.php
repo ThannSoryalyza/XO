@@ -2,22 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
-{
-    $this->call([
-        MatchScheduleSeeder::class,
-        // You can add ServiceSeeder here too later!
-    ]);
-}
+    {
+        // Call your admin login seeder here
+        $this->call([
+            AdminUserSeeder::class,
+        ]);
+    }
 }

@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('players', function (Blueprint $table) {
-            $table->id();
-            $table->string('image')->nullable();
-            $table->integer('number')->unsigned();
-            $table->string('name');
-            $table->string('position');
-            $table->string('role')->default('FW');
-            $table->timestamps();
-        });
+Schema::create('players', function (Blueprint $table) {
+    $table->id();
+    $table->string('image')->nullable();
+    $table->integer('number');
+    $table->string('name');
+    $table->string('position'); // GK, Defender, Midfielder, Forward
+    $table->timestamps();
+});
     }
 
     /**
