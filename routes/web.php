@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 // Public Front-End Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MatchesController;
+use App\Http\Controllers\StandingsController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ContactController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\Auth\LoginController;
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/matches', [MatchesController::class, 'index'])->name('matches');
+Route::get('/standings', [StandingsController::class, 'index'])->name('standings');
 Route::get('/player', [PlayerController::class, 'index'])->name('player');
 Route::get('/managers', [ManagerController::class, 'index'])->name('managers');
 
@@ -34,14 +36,19 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 | AUTHENTICATION ROUTES
 |--------------------------------------------------------------------------
 */
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-
-
-Route::prefix('admin')->name('admin.')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES (login required)
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // Core Dashboard
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
@@ -59,6 +66,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/matches', [AdminController::class, 'storeMatch'])->name('matches.store');
     Route::put('/matches/{id}', [AdminController::class, 'updateMatch'])->name('matches.update');
     Route::delete('/matches/{id}', [AdminController::class, 'destroyMatch'])->name('matches.destroy');
+
+    // League Standings
+    Route::post('/standings', [AdminController::class, 'storeStanding'])->name('standings.store');
+    Route::put('/standings/{id}', [AdminController::class, 'updateStanding'])->name('standings.update');
+    Route::delete('/standings/{id}', [AdminController::class, 'destroyStanding'])->name('standings.destroy');
 
     // Messages
     Route::post('/messages/{id}/read', [AdminController::class, 'markMessageRead'])->name('messages.read');

@@ -1,96 +1,195 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>XO United</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="/views/components/header.blade.php">
-    <link rel="stylesheet" href="/views/components/footer.blade.php">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Instrument Sans', sans-serif; }
-        .font-stadium { font-family: 'Bebas Neue', cursive; }
-    </style>
-</head>
-<body class="bg-white text-gray-900 selection:bg-red-600 selection:text-white">
+@extends('layouts.public')
 
-   <x-header />
+@section('title', 'XO United | Home')
 
-    <header class="relative max-w-7xl mx-auto px-6 py-16 lg:py-28 flex flex-col lg:flex-row items-center gap-12 overflow-hidden">
-        <div class="absolute -top-10 -right-10 w-96 h-96 bg-red-50 rounded-full blur-[100px] -z-10"></div>
-
-        <div class="flex-1 text-center lg:text-left">
-            <div class="inline-block px-4 py-1 mb-6 border-l-4 border-red-600 bg-red-50 text-red-600 font-bold text-xs uppercase tracking-widest">
-                Transfer Season 2026 Open
-            </div>
-            <h1 class="font-stadium text-7xl md:text-9xl leading-[0.8] mb-6">
-                PLAY FOR THE <br> <span class="text-red-600">BADGE.</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-500 mb-10 max-w-lg leading-relaxed font-medium">
-                Professional player management and technical scouting for the next generation of football stars. Join the XO United family.
-            </p>
-            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-                <a href="/matches" class="px-10 py-4 bg-red-600 text-white font-stadium text-2xl tracking-wider rounded-none hover:bg-black transition-colors shadow-xl shadow-red-600/20">
-                    VIEW MATCHES
-                </a>
-            </div>
-        </div>
-
-        <div class="flex-1 flex justify-center lg:justify-end">
-            <div class="relative group">
-                <div class="absolute -inset-2 bg-red-600 rounded-lg blur opacity-10 group-hover:opacity-30 transition duration-500"></div>
-                <div class="relative w-72 h-96 md:w-96 md:h-[500px] overflow-hidden rounded-lg bg-gray-200 border-4 border-white shadow-2xl">
-                    <img src="capitan.jpg"
-                         alt="Football Player"
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-linear-to-t from-red-900/40 to-transparent"></div>
+@section('content')
+    <section class="home-hero">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-hero-grid">
+                <div class="home-hero-copy">
+                    <p class="xo-eyebrow mb-2">Season 2025/26</p>
+                    <h1 class="font-stadium home-hero-title">PLAY FOR <span class="text-red-600">THE BADGE.</span></h1>
+                    <p class="home-hero-desc">Professional player management and scouting for the next generation of football stars.</p>
+                    <div class="home-hero-actions">
+                        <a href="{{ route('matches') }}" class="home-btn home-btn--primary">View Matches</a>
+                        <a href="{{ route('standings') }}" class="home-btn home-btn--outline">Standings</a>
+                    </div>
+                    <div class="home-hero-stats">
+                        <div class="home-hero-stat">
+                            <span class="home-hero-stat-num">{{ $upcomingMatches->count() }}</span>
+                            <span class="home-hero-stat-label">Upcoming</span>
+                        </div>
+                        <div class="home-hero-stat">
+                            <span class="home-hero-stat-num">{{ $playersCount }}</span>
+                            <span class="home-hero-stat-label">Players</span>
+                        </div>
+                        <div class="home-hero-stat">
+                            <span class="home-hero-stat-num">{{ $standings->count() }}</span>
+                            <span class="home-hero-stat-label">Clubs</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </header>
-
-    <section id="services" class="bg-red-600 py-20 px-6 ">
-        <div class="max-w-7xl mx-auto">
-            <div class="mb-16 text-center text-white">
-                <h2 class="font-stadium text-5xl md:text-6xl tracking-tight">CLUB SERVICES</h2>
-                <div class="w-20 h-1 bg-white mx-auto mt-4"></div>
-            </div>
-
-           <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-             @forelse($services as $service)
-        <div class="bg-white p-10 border-b-8 border-red-600 shadow-lg text-center w-full max-w-sm">
-            <div class="text-4xl mb-4">{{ $service->icon }}</div>
-            <h3 class="font-stadium text-2xl mb-2">{{ $service->title }}</h3>
-            <p class="text-gray-600">{{ $service->description }}</p>
-        </div>
-    @empty
-        <p class="text-center col-span-3 text-gray-400 italic">No services found in the database.</p>
-    @endforelse
-</div>
+                <div class="home-hero-media">
+                    <div class="home-hero-photo">
+                        <img src="{{ asset('img/capitan.jpg') }}" alt="XO United Captain" class="home-hero-photo-img">
+                        <div class="home-hero-photo-overlay"></div>
+                        <div class="home-hero-photo-caption">
+                            <p class="font-stadium home-hero-photo-title">XO UNITED FC</p>
+                            <p class="home-hero-photo-sub">Pride · Passion · Performance</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="space-y-6 mt-12 justify-center items-center text-cente">
-        <div class="max-w-7xl mx-auto text-center text-black">
-                <h2 class="font-stadium text-5xl md:text-6xl tracking-tight">Our Team</h2>
-            <p class="text-lg md:text-sm text-gray-600 mt-4 max-w-2xl mx-auto">
-                Whether you're a player, coach, scout, agent, sponsor, or media professional, XO United is your home for football excellence. Contact us today to learn how we can support your career and help you achieve your goals.
-            </p>
-                <div class="mt-5 hidden md:flex gap-10 uppercase text-sm tracking-widest justify-center">
-                    <a href="{{ url('/player') }}" class="{{ Request::is('player') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
-                        All Players
-                    </a>
-                    <a href="{{ url('/managers') }}" class="{{ Request::is('managers') ? 'text-red-600 border-b-2 border-red-600' : 'hover:text-white' }} px-6 py-2 rounded-md bg-red-600 text-white font-stadium text-xl tracking-wider hover:bg-black transition-all active:scale-95 md:text-sm lg:text-sm">
-                        Manager Team
-                    </a>
+    <section class="home-section home-section--muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-section-head">
+                <div>
+                    <p class="xo-eyebrow mb-1">Fixtures</p>
+                    <h2 class="font-stadium home-section-title">UPCOMING MATCHES</h2>
                 </div>
-            <img src="team.jpg" alt="Our Team" class="w-200 h-100 justify-center mx-auto mt-5 shadow-lg " >
+                <a href="{{ route('matches') }}" class="home-section-link">View All →</a>
+            </div>
+
+            <div class="match-card-grid">
+                @forelse($upcomingMatches->take(3) as $match)
+                    <x-match-card :match="$match" />
+                @empty
+                    <div class="home-empty">No upcoming matches scheduled yet.</div>
+                @endforelse
+            </div>
         </div>
     </section>
 
-<x-footer />
+    @if($standings->isNotEmpty())
+    <section class="home-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-section-head">
+                <div>
+                    <p class="xo-eyebrow mb-1">League Table</p>
+                    <h2 class="font-stadium home-section-title">TOP STANDINGS</h2>
+                </div>
+                <a href="{{ route('standings') }}" class="home-section-link">Full Table →</a>
+            </div>
 
-</body>
-</html>
+            <div class="home-standings-card">
+                <table class="home-standings-table">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th>Club</th>
+                            <th class="home-standings-hide-sm">P</th>
+                            <th class="home-standings-hide-sm">W</th>
+                            <th class="home-standings-hide-sm">D</th>
+                            <th class="home-standings-hide-sm">L</th>
+                            <th>GD</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($standings->take(5) as $team)
+                            <tr>
+                                <td class="home-standings-pos">{{ $team->position }}</td>
+                                <td>
+                                    <div class="home-standings-club">
+                                        @if($team->logo)
+                                            <img src="{{ media_asset($team->logo) }}" alt="" class="home-standings-logo">
+                                        @else
+                                            <span class="home-standings-logo-fallback">{{ strtoupper(substr($team->club_name, 0, 1)) }}</span>
+                                        @endif
+                                        <span>{{ $team->club_name }}</span>
+                                    </div>
+                                </td>
+                                <td class="home-standings-hide-sm">{{ $team->played }}</td>
+                                <td class="home-standings-hide-sm">{{ $team->won }}</td>
+                                <td class="home-standings-hide-sm">{{ $team->drawn }}</td>
+                                <td class="home-standings-hide-sm">{{ $team->lost }}</td>
+                                <td class="{{ $team->goal_difference >= 0 ? 'text-emerald-600' : 'text-red-600' }}">{{ $team->goal_difference >= 0 ? '+' : '' }}{{ $team->goal_difference }}</td>
+                                <td class="home-standings-pts">{{ $team->points }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section id="services" class="home-section home-section--red">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-section-head home-section-head--light">
+                <div class="home-section-head-center">
+                    <p class="home-eyebrow-light mb-1">XO United Football Club</p>
+                    <h2 class="font-stadium home-section-title home-section-title--light">CLUB SERVICES</h2>
+                    <p class="home-services-desc">Built for players, coaches, and supporters.</p>
+                </div>
+            </div>
+
+            <div class="home-services-grid">
+                @forelse($services as $service)
+                    <article class="home-service-card">
+                        <div class="home-service-icon">{{ $service->icon }}</div>
+                        <h3 class="font-stadium home-service-title">{{ $service->title }}</h3>
+                        <p class="home-service-text">{{ $service->description }}</p>
+                    </article>
+                @empty
+                    <div class="home-empty home-empty--light">Club services coming soon.</div>
+                @endforelse
+            </div>
+
+            @if($services->isNotEmpty())
+                <div class="home-services-cta">
+                    <a href="{{ route('contact.index') }}" class="home-btn home-btn--white">Get Started →</a>
+                </div>
+            @endif
+        </div>
+    </section>
+
+    <section class="home-section home-section--muted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-team-grid">
+                <button
+                    type="button"
+                    class="home-team-photo"
+                    data-lightbox-src="{{ asset('img/team.jpg') }}"
+                    data-lightbox-title="Our Team"
+                    data-lightbox-subtitle="United under one badge."
+                    aria-label="View full team photo"
+                >
+                    <img src="{{ asset('img/team.jpg') }}" alt="Our Team" loading="lazy">
+                    <div class="home-team-photo-overlay"></div>
+                    <div class="home-team-photo-caption">
+                        <h2 class="font-stadium">OUR TEAM</h2>
+                        <p>United under one badge.</p>
+                    </div>
+                </button>
+                <div class="home-team-copy">
+                    <p class="xo-eyebrow mb-1">Squad & Staff</p>
+                    <h3 class="font-stadium home-section-title">MEET THE SQUAD</h3>
+                    <p class="home-team-desc">Explore our full roster and management team.</p>
+                    <div class="home-team-actions">
+                        <a href="{{ route('player') }}" class="home-btn home-btn--primary">All Players</a>
+                        <a href="{{ route('managers') }}" class="home-btn home-btn--outline">Manager Team</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-section home-join">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="home-join-card">
+                <div class="home-join-copy">
+                    <p class="xo-eyebrow mb-1">Get Involved</p>
+                    <h2 class="font-stadium home-join-title">INTERESTED IN JOINING?</h2>
+                    <p class="home-join-text">Contact us to learn about trials, training sessions, and becoming part of XO United.</p>
+                </div>
+                <a href="{{ route('contact.index') }}" class="home-btn home-btn--primary home-join-btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    @include('components.image-lightbox')
+@endsection

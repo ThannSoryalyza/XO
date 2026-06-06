@@ -1,117 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Roster | XO United</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .aspect-3\/4 { aspect-ratio: 3 / 4; }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-900">
-    <x-header />
+@extends('layouts.public')
 
-    <section class="max-w-7xl mx-auto px-4 md:px-6 py-8 mt-4">
+@section('title', 'Player Roster | XO United')
 
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-6 mb-12">
-            <h1 class="px-4 py-1 border-l-4 border-red-600 bg-green-50 text-red-600 font-bold text-xl uppercase tracking-wider">
-                Team Squad
-            </h1>
+@section('content')
+@php
+    $roleConfig = [
+        'GK' => ['title' => 'Goalkeeper', 'label' => 'GOALKEEPER'],
+        'DF' => ['title' => 'Defender', 'label' => 'DEFENDER'],
+        'MD' => ['title' => 'Midfielder', 'label' => 'MIDFIELDER'],
+        'FW' => ['title' => 'Forward', 'label' => 'FORWARD'],
+    ];
+@endphp
 
-            <div class="grid grid-cols-2 sm:flex sm:flex-row gap-4 md:gap-8 w-full md:w-auto">
-                @php
-                    /*
-                       FIX: The keys here (GK, DF, etc) MUST match exactly
-                       what you save in the database position column.
-                    */
-                    $roleConfig = [
-                        'GK' => ['title' => 'GOALKEEPER'],
-                        'DF' => ['title' => 'DEFENDER'],
-                        'MD' => ['title' => 'MIDFIELDER'],
-                        'FW' => ['title' => 'FORWARD'],
-                    ];
-                @endphp
-
-                @foreach($roleConfig as $code => $data)
-                <div class="flex flex-col items-center justify-center">
-                    <p class="text-black leading-none text-center">
-                        <span class="font-bold text-3xl md:text-4xl block w-full">
-                            {{-- Count correctly matches the database code --}}
-                            {{ $players->where('position', $code)->count() }}
-                        </span>
-                    </p>
-                    <p class="text-red-600 font-bold text-[10px] md:text-xs tracking-widest mt-1 uppercase text-center">
-                        {{ $data['title'] }}
-                    </p>
+<section class="squad-page">
+    <div class="squad-hero">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="squad-hero-grid">
+                <div class="squad-hero-copy">
+                    <img src="{{ asset('img/XO.png') }}" alt="XO United" class="squad-hero-logo">
+                    <p class="xo-eyebrow squad-hero-eyebrow mb-2">First Team Squad</p>
+                    <h1 class="font-stadium squad-hero-title">ALL PLAYERS</h1>
+                    <p class="squad-hero-desc">Full squad roster organised by position.</p>
                 </div>
+                <div class="squad-hero-total">
+                    <p class="squad-hero-total-number">{{ $players->count() }}</p>
+                    <p class="squad-hero-total-sub">Total Players</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="squad-filter" id="squad-filter" aria-label="Filter by position">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="squad-filter-track">
+                @foreach($roleConfig as $code => $data)
+                    @php $posCount = $players->where('position', $code)->count(); @endphp
+                    <a href="#squad-{{ strtolower($code) }}" class="squad-filter-btn" data-squad-section="squad-{{ strtolower($code) }}">
+                        <span class="squad-filter-code">{{ $code }}</span>
+                        <span class="squad-filter-count">{{ $posCount }} {{ $posCount === 1 ? 'player' : 'players' }}</span>
+                    </a>
                 @endforeach
             </div>
         </div>
+    </nav>
 
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         @foreach($roleConfig as $code => $data)
             @php $count = $players->where('position', $code)->count(); @endphp
-
-            <div class="flex gap-4 md:gap-6 items-baseline mt-12 mb-6 md:mb-8">
-                {{-- This displays GK, DF, MD, or FW --}}
-                <h1 class="text-red-600 font-bold text-5xl md:text-7xl opacity-80 select-none" style="-webkit-text-stroke: 0.2px rgb(0, 0, 0);">
-                    {{ $code }}
-                </h1>
-                <div class="flex flex-col">
-                    <p class="text-black">
-                        <span class="font-bold text-2xl md:text-3xl tracking-tight uppercase">{{ $data['title'] }}</span>
-                    </p>
-                    <p class="text-gray-400 text-[10px] md:text-sm ">
-                        {{ $count }} Players
-                    </p>
+            <section id="squad-{{ strtolower($code) }}" class="squad-block">
+                <div class="squad-block-header">
+                    <h2 class="squad-block-title">{{ $data['label'] }}</h2>
+                    <span class="squad-block-count">{{ $count }} {{ $count === 1 ? 'player' : 'players' }}</span>
                 </div>
-            </div>
 
-            <div class="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 mb-10">
-                @forelse($players->where('position', $code) as $player)
-                    <div class="bg-white rounded-xl md:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col group">
-
-                        <div class="relative w-full aspect-3/4 overflow-hidden bg-gray-200">
+                <div class="squad-grid">
+                    @forelse($players->where('position', $code) as $player)
+                        <article class="squad-player">
                             @if($player->image)
-                                {{-- Added storage/ prefix for public visibility --}}
-                                <img src="{{ asset( $player->image) }}"
-                                     alt="{{ $player->name }}"
-                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <button
+                                    type="button"
+                                    class="squad-player-photo"
+                                    data-lightbox-src="{{ media_asset($player->image) }}"
+                                    data-lightbox-title="{{ $player->name }}"
+                                    data-lightbox-subtitle="#{{ $player->number }} · {{ $data['label'] }}"
+                                    aria-label="View full photo of {{ $player->name }}"
+                                >
+                                    <img src="{{ media_asset($player->image) }}" alt="{{ $player->name }}" loading="lazy">
+                                </button>
                             @else
-                                <div class="flex flex-col items-center justify-center h-full text-gray-400 p-4">
-                                    <span class="text-4xl md:text-6xl mb-2">⚽</span>
+                                <div class="squad-player-photo squad-player-photo--empty">
+                                    <span class="squad-player-empty-icon">⚽</span>
                                 </div>
                             @endif
-
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80"></div>
-
-                            <div class="absolute top-2 left-2 md:top-4 md:left-4 bg-red-600 px-2 py-0.5 md:px-3 md:py-1 rounded">
-                                <span class="text-[9px] md:text-xs font-black text-white tracking-widest">{{ $code }}</span>
+                            <div class="squad-player-info">
+                                <span class="squad-player-num">{{ $player->number }}</span>
+                                <div class="squad-player-details">
+                                    <h3 class="squad-player-name">{{ $player->name }}</h3>
+                                    <span class="squad-player-role">{{ $code }} · {{ $data['title'] }}</span>
+                                </div>
                             </div>
-
-                            <div class="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-4 flex items-baseline gap-1 md:gap-2">
-                                <span class="text-xl md:text-4xl font-black text-white italic leading-none" style="-webkit-text-stroke: 0.5px black;">{{ $player->number }}</span>
-                                <h2 class="backdrop-blur-sm text-white text-[10px] md:text-sm font-bold uppercase tracking-wider px-2 py-1.5 md:px-5 md:py-2 rounded-full border border-white/20 bg-black/30 shadow-xl truncate max-w-full">
-                                    {{ $player->name }}
-                                </h2>
-                            </div>
+                        </article>
+                    @empty
+                        <div class="squad-empty">
+                            <p>No {{ strtolower($data['title']) }}s in the squad yet.</p>
                         </div>
-                    </div>
-                @empty
-                    <div class="col-span-full py-12 border-2 border-dashed border-gray-200 rounded-2xl flex items-center justify-center bg-gray-50/50">
-                        <p class="text-gray-400 italic text-sm md:text-base font-medium">
-                            No {{ strtolower($data['title']) }}s found.
-                        </p>
-                    </div>
-                @endforelse
-            </div>
-
-            @if(!$loop->last)
-                <hr class="border-gray-200 my-8 md:my-16">
-            @endif
+                    @endforelse
+                </div>
+            </section>
         @endforeach
 
-    </section>
-    <x-footer />
-</body>
-</html>
+        <div class="squad-bottom-cta">
+            <h3 class="font-stadium squad-bottom-title">MANAGEMENT TEAM</h3>
+            <p class="squad-bottom-text">View coaches and staff behind the squad.</p>
+            <a href="{{ route('managers') }}" class="squad-bottom-link">View Management Team</a>
+        </div>
+    </div>
+</section>
+
+@include('components.image-lightbox')
+
+@push('scripts')
+    <script src="{{ asset('js/squad-nav.js') }}"></script>
+@endpush
+@endsection
