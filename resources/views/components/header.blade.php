@@ -12,9 +12,9 @@
 
         <div class="hidden md:flex gap-7 lg:gap-9 font-semibold uppercase text-xs tracking-widest text-zinc-600">
             <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'text-red-600' : 'hover:text-red-600' }} transition-colors">Home</a>
+            <a href="{{ url('/about') }}" class="{{ Request::is('about') ? 'text-red-600' : 'hover:text-red-600' }} transition-colors">About</a>
             <a href="{{ url('/matches') }}" class="{{ Request::is('matches') ? 'text-red-600' : 'hover:text-red-600' }} transition-colors">Matches</a>
             <a href="{{ url('/standings') }}" class="{{ Request::is('standings') ? 'text-red-600' : 'hover:text-red-600' }} transition-colors">Standings</a>
-            <a href="{{ url('/contact') }}" class="{{ Request::is('contact') ? 'text-red-600' : 'hover:text-red-600' }} transition-colors">Contact</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3">
@@ -32,7 +32,7 @@
         <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600' }} transition-colors">Home</a>
         <a href="{{ url('/matches') }}" class="{{ Request::is('matches') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600' }} transition-colors">Matches</a>
         <a href="{{ url('/standings') }}" class="{{ Request::is('standings') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600' }} transition-colors">Standings</a>
-        <a href="{{ url('/contact') }}" class="{{ Request::is('contact') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600' }} transition-colors">Contact</a>
+        <a href="{{ url('/about') }}" class="{{ Request::is('about') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600' }} transition-colors">About</a>
         <hr class="border-zinc-100">
         <a href="{{ url('/player') }}" class="text-zinc-600 hover:text-red-600 transition-colors">All Players</a>
         <a href="{{ url('/managers') }}" class="text-zinc-600 hover:text-red-600 transition-colors">Manager Team</a>

@@ -10,7 +10,7 @@ use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\StandingsController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 
 // Authentication & Administration Controllers
@@ -22,14 +22,12 @@ use App\Http\Controllers\Auth\LoginController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/matches', [MatchesController::class, 'index'])->name('matches');
 Route::get('/standings', [StandingsController::class, 'index'])->name('standings');
 Route::get('/player', [PlayerController::class, 'index'])->name('player');
 Route::get('/managers', [ManagerController::class, 'index'])->name('managers');
 
-// Contact Page Routes
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 /*
 |--------------------------------------------------------------------------

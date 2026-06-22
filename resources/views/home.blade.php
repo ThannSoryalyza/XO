@@ -141,7 +141,7 @@
 
             @if($services->isNotEmpty())
                 <div class="home-services-cta">
-                    <a href="{{ route('contact.index') }}" class="home-btn home-btn--white">Get Started →</a>
+                    <a href="mailto:xounited@gmail.com" class="home-btn home-btn--white">Get Started →</a>
                 </div>
             @endif
         </div>
@@ -186,7 +186,7 @@
                     <h2 class="font-stadium home-join-title">INTERESTED IN JOINING?</h2>
                     <p class="home-join-text">Contact us to learn about trials, training sessions, and becoming part of XO United.</p>
                 </div>
-                <a href="{{ route('contact.index') }}" class="home-btn home-btn--primary home-join-btn">Contact Us</a>
+                <a href="mailto:xounited@gmail.com" class="home-btn home-btn--primary home-join-btn">Email Us</a>
             </div>
         </div>
     </section>

@@ -20,7 +20,13 @@
             @empty
                 <div class="match-card-empty">
                     <span class="match-card-empty-icon">📅</span>
-                    <p>No upcoming matches scheduled at the moment.</p>
+                    <p class="match-card-empty-title">No upcoming matches scheduled at the moment.</p>
+                    <p class="match-card-empty-text">When a new fixture is added, it will appear here.</p>
+                    @auth
+                        <a href="{{ route('admin.dashboard') }}#matches-sec" class="match-card-empty-btn">Add New Match</a>
+                    @else
+                        <a href="{{ route('login') }}" class="match-card-empty-btn">Add New Match</a>
+                    @endauth
                 </div>
             @endforelse
         </div>

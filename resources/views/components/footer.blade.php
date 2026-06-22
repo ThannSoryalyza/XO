@@ -12,6 +12,7 @@
             <div>
                 <h4 class="font-stadium site-footer-heading">EXPLORE</h4>
                 <ul class="site-footer-links">
+                    <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('matches') }}">Matches</a></li>
                     <li><a href="{{ route('standings') }}">Standings</a></li>
                     <li><a href="{{ route('player') }}">Players</a></li>
@@ -24,7 +25,6 @@
                     <li>Phum Trapang Thloeng I, Phnom Penh</li>
                     <li>XO TEX Industrial Co., Ltd</li>
                     <li>xounited@gmail.com</li>
-                    <li><a href="{{ route('contact.index') }}">Send a message →</a></li>
                 </ul>
             </div>
             <div>
