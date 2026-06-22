@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<?php if (! $__env->hasRenderedOnce('177d6518-a283-4cc7-b85d-3da95cecd78b')): $__env->markAsRenderedOnce('177d6518-a283-4cc7-b85d-3da95cecd78b'); ?>
+<?php if (! $__env->hasRenderedOnce('d461b4df-8a53-47dd-bafc-8068c5af00fb')): $__env->markAsRenderedOnce('d461b4df-8a53-47dd-bafc-8068c5af00fb'); ?>
     <?php $__env->startPush('scripts'); ?>
         <script src="<?php echo e(asset('js/lightbox.js')); ?>"></script>
     <?php $__env->stopPush(); ?>

@@ -37,7 +37,13 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="match-card-empty">
                     <span class="match-card-empty-icon">📅</span>
-                    <p>No upcoming matches scheduled at the moment.</p>
+                    <p class="match-card-empty-title">No upcoming matches scheduled at the moment.</p>
+                    <p class="match-card-empty-text">When a new fixture is added, it will appear here.</p>
+                    <?php if(auth()->guard()->check()): ?>
+                        <a href="<?php echo e(route('admin.dashboard')); ?>#matches-sec" class="match-card-empty-btn">Add New Match</a>
+                    <?php else: ?>
+                        <a href="<?php echo e(route('login')); ?>" class="match-card-empty-btn">Add New Match</a>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
         </div>

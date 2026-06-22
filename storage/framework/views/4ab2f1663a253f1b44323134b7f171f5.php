@@ -12,9 +12,9 @@
 
         <div class="hidden md:flex gap-7 lg:gap-9 font-semibold uppercase text-xs tracking-widest text-zinc-600">
             <a href="<?php echo e(url('/')); ?>" class="<?php echo e(Request::is('/') ? 'text-red-600' : 'hover:text-red-600'); ?> transition-colors">Home</a>
+            <a href="<?php echo e(url('/about')); ?>" class="<?php echo e(Request::is('about') ? 'text-red-600' : 'hover:text-red-600'); ?> transition-colors">About</a>
             <a href="<?php echo e(url('/matches')); ?>" class="<?php echo e(Request::is('matches') ? 'text-red-600' : 'hover:text-red-600'); ?> transition-colors">Matches</a>
             <a href="<?php echo e(url('/standings')); ?>" class="<?php echo e(Request::is('standings') ? 'text-red-600' : 'hover:text-red-600'); ?> transition-colors">Standings</a>
-            <a href="<?php echo e(url('/contact')); ?>" class="<?php echo e(Request::is('contact') ? 'text-red-600' : 'hover:text-red-600'); ?> transition-colors">Contact</a>
         </div>
 
         <div class="flex items-center gap-2 sm:gap-3">
@@ -32,7 +32,7 @@
         <a href="<?php echo e(url('/')); ?>" class="<?php echo e(Request::is('/') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600'); ?> transition-colors">Home</a>
         <a href="<?php echo e(url('/matches')); ?>" class="<?php echo e(Request::is('matches') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600'); ?> transition-colors">Matches</a>
         <a href="<?php echo e(url('/standings')); ?>" class="<?php echo e(Request::is('standings') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600'); ?> transition-colors">Standings</a>
-        <a href="<?php echo e(url('/contact')); ?>" class="<?php echo e(Request::is('contact') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600'); ?> transition-colors">Contact</a>
+        <a href="<?php echo e(url('/about')); ?>" class="<?php echo e(Request::is('about') ? 'text-red-600' : 'text-zinc-600 hover:text-red-600'); ?> transition-colors">About</a>
         <hr class="border-zinc-100">
         <a href="<?php echo e(url('/player')); ?>" class="text-zinc-600 hover:text-red-600 transition-colors">All Players</a>
         <a href="<?php echo e(url('/managers')); ?>" class="text-zinc-600 hover:text-red-600 transition-colors">Manager Team</a>
